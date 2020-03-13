@@ -1,0 +1,1 @@
+public class InvalidRadicandException extends Exception{}
