@@ -149,7 +149,7 @@ public class Calcolatrice
             return "Il radicando non può essere negativo!";
         }
 
-        return "La potenza vale "+radice;
+        return "La radice vale "+radice;
     }
 
     //Metodo per il calcolo del logaritmo

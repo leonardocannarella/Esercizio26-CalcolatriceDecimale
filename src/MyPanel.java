@@ -11,8 +11,15 @@ public class MyPanel extends JPanel implements ActionListener
     JLabel ris, tip;
     JButton add, sott, molt, divis, pot, radq, log, openGuide;
 
+    GuidaFrame guida; //dichiarazione del frame guida
+
     public MyPanel()
     {
+        guida = new GuidaFrame("Guida");
+        Container c2 = guida.getContentPane();
+        GuidaPanel panel1 = new GuidaPanel();
+        c2.add(panel1);
+        
         num1 = new JTextField();
         num1.setHorizontalAlignment(JTextField.CENTER);
         num2 = new JTextField();
@@ -68,6 +75,8 @@ public class MyPanel extends JPanel implements ActionListener
         String text2 = num2.getText();
         boolean match1 = text1.matches("[a-zA-Z]");
         boolean match2 = text1.matches("[a-zA-Z]");
+
+        int i=0,j=0;
 
         if(!match1 && !match2)
         {
@@ -175,12 +184,10 @@ public class MyPanel extends JPanel implements ActionListener
 
             if(pulsantePremuto==openGuide)
             {
-                GuidaFrame guida = new GuidaFrame("Guida");
-                Container c2 = guida.getContentPane();
-                GuidaPanel panel1 = new GuidaPanel();
-                c2.add(panel1);
-
-                guida.setVisible(true);
+                if(!guida.isVisible())
+                {
+                    guida.setVisible(true);
+                }
             }
         }
         else
