@@ -3,13 +3,14 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class MyPanel extends JPanel implements ActionListener
 {
     Calcolatrice c1 = new Calcolatrice(0,0);
     JTextField num1, num2;
     JLabel ris, tip;
-    JButton add, sott, molt, divis, pot, radq, log, openGuide;
+    JButton add, sott, molt, divis, pot, radq, log, openGuide, btnSave, btnReadSaved;
 
     GuidaFrame guida; //dichiarazione del frame guida
 
@@ -37,10 +38,12 @@ public class MyPanel extends JPanel implements ActionListener
         radq = new JButton("sqrt(a)");
         log = new JButton("log_a(b)");
         openGuide = new JButton("Guida");
+        btnSave = new JButton("M");
+        btnReadSaved = new JButton("RM");
         openGuide.setBorder(new LineBorder(Color.BLACK));
         openGuide.setForeground(Color.green);
 
-        setLayout(new GridLayout(12,1));
+        setLayout(new GridLayout(14,1));
         add(tip);
         add(num1);
         add(num2);
@@ -53,6 +56,8 @@ public class MyPanel extends JPanel implements ActionListener
         add(radq);
         add(log);
         add(openGuide);
+        add(btnSave);
+        add(btnReadSaved);
 
         add.addActionListener(this);
         sott.addActionListener(this);
@@ -62,6 +67,8 @@ public class MyPanel extends JPanel implements ActionListener
         radq.addActionListener(this);
         log.addActionListener(this);
         openGuide.addActionListener(this);
+        btnSave.addActionListener(this);
+        btnReadSaved.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e)
@@ -187,6 +194,39 @@ public class MyPanel extends JPanel implements ActionListener
                 if(!guida.isVisible())
                 {
                     guida.setVisible(true);
+                }
+            }
+
+            if(pulsantePremuto==btnSave)
+            {
+                try {
+                    TextFile textEditor = new TextFile('w');
+                    if(!ris.getText().equals("NESSUN RISULTATO"))
+                    {
+                        textEditor.writeOnFile(ris.getText());
+                    }
+                    else
+                    {
+                        textEditor.writeOnFile("0");
+                    }
+                }
+                catch (IOException | FileException ex)
+                {
+                    System.out.println("Si è verificato un errore!");
+                }
+            }
+
+            if(pulsantePremuto==btnReadSaved)
+            {
+                String s="";
+                try {
+                    TextFile textEditor = new TextFile('r');
+                    s = textEditor.readFromFile();
+                    ris.setText(s);
+                }
+                catch (IOException | FileException ex)
+                {
+                    ris.setText("0");
                 }
             }
         }
