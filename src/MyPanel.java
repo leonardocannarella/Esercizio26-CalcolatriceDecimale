@@ -81,7 +81,7 @@ public class MyPanel extends JPanel implements ActionListener
         String text1 = num1.getText();
         String text2 = num2.getText();
         boolean match1 = text1.matches("[a-zA-Z]");
-        boolean match2 = text1.matches("[a-zA-Z]");
+        boolean match2 = text2.matches("[a-zA-Z]");
 
         int i=0,j=0;
 
